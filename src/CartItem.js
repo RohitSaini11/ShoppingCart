@@ -10,7 +10,13 @@ class CartItem extends React.Component{ //inherits properties from React.compone
             qty: 1,
             img: ''
         }
+        // this.increaseQuantity = this.increaseQuantity.bind(this)
     }
+
+    increaseQuantity = () => {
+        console.log("this",this.state);
+    }
+
     render(){
         const { price , title , qty } = this.state;
         return (
@@ -24,9 +30,21 @@ class CartItem extends React.Component{ //inherits properties from React.compone
                     <div style={ {color:'#777'} }>Qty:{qty}</div>
                     <div className="cart-item-actions">
                         {/* BUTTONS */}
-                        <img alt="increase" className="action-icons" src="plus.png"/>
-                        <img alt="decrease" className="action-icons" src="minus.png"/>
-                        <img alt="delete" className="action-icons" src="delete.png"/>
+                        <img alt="increase" 
+                        className="action-icons" 
+                        src="plus.png"
+                        onClick={this.increaseQuantity}
+                        />
+                        <img alt="decrease" 
+                        className="action-icons" 
+                        src="minus.png"
+                        
+                        />
+                        <img alt="delete" 
+                        className="action-icons" 
+                        src="delete.png"
+                        
+                        />
                     </div>
                 </div>
             </div>
