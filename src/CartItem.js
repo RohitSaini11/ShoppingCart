@@ -25,7 +25,20 @@ class CartItem extends React.Component{ //inherits properties from React.compone
                 qty:prevState.qty + 1
             }
         });
-        
+
+    }
+
+    decreaseQuantity = () => {
+        const { qty } = this.state;
+
+        if( qty==0 ){
+            return;
+        }
+        this.setState((prevState) =>{
+            return{
+                qty: prevState.qty - 1
+            }
+        })
     }
 
     render(){
@@ -49,7 +62,7 @@ class CartItem extends React.Component{ //inherits properties from React.compone
                         <img alt="decrease" 
                         className="action-icons" 
                         src="minus.png"
-                        
+                        onClick={this.decreaseQuantity}
                         />
                         <img alt="delete" 
                         className="action-icons" 
