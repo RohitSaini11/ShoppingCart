@@ -14,7 +14,18 @@ class CartItem extends React.Component{ //inherits properties from React.compone
     }
 
     increaseQuantity = () => {
-        console.log("this",this.state);
+        //this is first way to modify state of a component
+        // this.setState({
+        //     qty: this.state.qty + 1
+        // });
+        
+        //this is second way to modify state of a component Using the prevState
+        this.setState((prevState) => {
+            return{
+                qty:prevState.qty + 1
+            }
+        });
+        
     }
 
     render(){
