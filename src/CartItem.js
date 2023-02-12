@@ -10,6 +10,7 @@ class CartItem extends React.Component{ //inherits properties from React.compone
             qty: 1,
             img: ''
         }
+        //assign the function to this : to be included in the first form of this.setState
         // this.increaseQuantity = this.increaseQuantity.bind(this)
     }
 
@@ -31,7 +32,7 @@ class CartItem extends React.Component{ //inherits properties from React.compone
     decreaseQuantity = () => {
         const { qty } = this.state;
 
-        if( qty==0 ){
+        if( qty === 0 ){
             return;
         }
         this.setState((prevState) =>{
