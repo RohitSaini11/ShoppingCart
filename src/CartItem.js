@@ -2,48 +2,52 @@ import React from "react";
 
 class CartItem extends React.Component{ //inherits properties from React.component
 
-    constructor(){
-        super();
-        this.state = {
-            price: 999,
-            title: 'Mobile Phone',
-            qty: 1,
-            img: ''
-        }
-        //assign the function to this : to be included in the first form of this.setState
-        // this.increaseQuantity = this.increaseQuantity.bind(this)
-    }
+    // constructor(){
+    //     super();
+    //     this.state = {
+    //         price: 999,
+    //         title: 'Mobile Phone',
+    //         qty: 1,
+    //         img: ''
+    //     }
+    //     //assign the function to this : to be included in the first form of this.setState
+    //     // this.increaseQuantity = this.increaseQuantity.bind(this)
+    // }
 
-    increaseQuantity = () => {
-        //this is first way to modify state of a component
-        // this.setState({
-        //     qty: this.state.qty + 1
-        // });
+    // increaseQuantity = () => {
+    //     //this is first way to modify state of a component
+    //     // this.setState({
+    //     //     qty: this.state.qty + 1
+    //     // });
         
-        //this is second way to modify state of a component Using the prevState
-        this.setState((prevState) => {
-            return{
-                qty:prevState.qty + 1
-            }
-        });
+    //     //this is second way to modify state of a component Using the prevState
+    //     this.setState((prevState) => {
+    //         return{
+    //             qty:prevState.qty + 1
+    //         }
+    //     });
 
-    }
+    // }
 
-    decreaseQuantity = () => {
-        const { qty } = this.state;
+    // decreaseQuantity = () => {
+    //     const { qty } = this.state;
 
-        if( qty === 0 ){
-            return;
-        }
-        this.setState((prevState) =>{
-            return{
-                qty: prevState.qty - 1
-            }
-        })
-    }
+    //     if( qty === 0 ){
+    //         return;
+    //     }
+    //     this.setState((prevState) =>{
+    //         return{
+    //             qty: prevState.qty - 1
+    //         }
+    //     })
+    // }
 
     render(){
-        const { price , title , qty } = this.state;
+        const { price , title , qty } = this.props.product;
+        const { product, 
+                onIncreaseQuantity , 
+                onDecreaseQuantity, 
+                onDeleteProduct } = this.props;
         return (
             <div className="cart-item">
                 <div className="left-block">
@@ -58,17 +62,17 @@ class CartItem extends React.Component{ //inherits properties from React.compone
                         <img alt="increase" 
                         className="action-icons" 
                         src="plus.png"
-                        onClick={this.increaseQuantity}
+                        onClick={() => onIncreaseQuantity(product) }
                         />
                         <img alt="decrease" 
                         className="action-icons" 
                         src="minus.png"
-                        onClick={this.decreaseQuantity}
+                        onClick={() => onDecreaseQuantity(product)}
                         />
                         <img alt="delete" 
                         className="action-icons" 
                         src="delete.png"
-                        
+                        onClick={() => onDeleteProduct(product.id)}
                         />
                     </div>
                 </div>
