@@ -1,37 +1,35 @@
 import React from 'react';
 import Cart from "./cart";
 import Navbar from './Navbar';
+import { firestore } from "./firebase";
 
 class App extends React.Component {
   
   constructor(){
     super();
     this.state = {
-        products:[
-            {
-                price: 99,
-                title: 'Watch',
-                qty: 1,
-                img: '',
-                id : 1
-            },
-            {
-                price: 999,
-                title: 'Mobile Phone',
-                qty: 1,
-                img: '',
-                id : 2
-            },
-            {
-                price: 9999,
-                title: 'Laptop',
-                qty: 1,
-                img: '',
-                id : 3
-            }
-                
-        ]
+        products:[]
     }
+  }
+
+  componentDidMount() {
+    //fetching all the products from the cloud firestore
+    firestore
+      //query for fecthing the product which we want as per our query
+      .collection("products") //getting all the products
+      // .where('price','>=', 999) // after fetching db we should write query
+      .onSnapshot((snapshot) => {
+        const products = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          data["id"] = doc.id;
+          return data;
+        });
+
+        this.setState({
+          products: products,
+          loading: false,
+        });
+      });
   }
 
   handleIncreaseQuantity = (product) => {
@@ -111,3 +109,25 @@ class App extends React.Component {
 }
 
 export default App;
+
+// {
+//   price: 99,
+//   title: 'Watch',
+//   qty: 1,
+//   img: '',
+//   id : 1
+// },
+// {
+//   price: 999,
+//   title: 'Mobile Phone',
+//   qty: 1,
+//   img: '',
+//   id : 2
+// },
+// {
+//   price: 9999,
+//   title: 'Laptop',
+//   qty: 1,
+//   img: '',
+//   id : 3
+// }
